@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>Hello World</title>
+    </head>
+
+
+    <script src="jquery-1.8.2.js" type="text/javascript" ></script>
+
+    <body>
+        <h1>Congratulations,</h1>
+        <p>you are able to start web development in C++ with Tufão</p>
+
+
+    <script type="text/javascript" >
+
+        function sleep(milliseconds) {
+          var start = new Date().getTime();
+          for (var i = 0; i < 1e7; i++) {
+            if ((new Date().getTime() - start) > milliseconds){
+              break;
+            }
+          }
+        }
+
+        var fun = function (count){
+            var elem = $("<p id='test'>Asnc proc "+count+" started ...</p>" );
+            elem.appendTo( "body" );
+
+            $.get('/thread'+i, function(data) {
+                elem.html("Asnc proc "+count+" FINISHED ...");
+            });
+        }
+
+        for(var i = 0; i < 10 ; i++){
+            fun(i);
+            //sleep(1000);
+        }
+    </script>
+    </body>
+</html>
