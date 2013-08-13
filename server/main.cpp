@@ -7,6 +7,8 @@
 #include <Tufao/HttpServer>
 #include <Tufao/threadedhttprequestdispatcher.h>
 #include <functional>
+#include <QDebug>
+#include <QThread>
 
 #include "testhandler.h"
 
@@ -17,6 +19,8 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
 
     auto threadInit = []{
+
+        qDebug()<<"Running Thread initializer "<<QThread::currentThreadId();
 
         HttpServerRequestRouter* router = new HttpServerRequestRouter();
         TestHandler *handler = new TestHandler(router);

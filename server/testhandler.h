@@ -12,7 +12,14 @@ class TestHandler : public QObject,
 
     public:
         explicit TestHandler(QObject * parent = 0);
-        virtual bool handleRequest(Tufao::HttpServerRequest &, Tufao::HttpServerResponse &response);
+        virtual bool handleRequest(Tufao::HttpServerRequest &request, Tufao::HttpServerResponse &response);
+
+    public slots:
+        void theEnd ();
+
+    private:
+        Tufao::HttpServerRequest  *currentRequest;
+        Tufao::HttpServerResponse *currentResponse;
         
 };
 
