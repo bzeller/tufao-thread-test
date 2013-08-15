@@ -3,6 +3,7 @@
 #include <QThread>
 #include <QTimer>
 #include <Tufao/HttpServerResponse>
+#include <Tufao/threadedhttprequestdispatcher.h>
 
 using namespace Tufao;
 
@@ -15,7 +16,7 @@ TestHandler::TestHandler(QObject *parent) :
 
 bool TestHandler::handleRequest(HttpServerRequest &request, HttpServerResponse &response)
 {
-    debug()<<"Started Long Running Request";
+    tDebug()<<"Started Long Running Request";
     currentRequest = &request;
     currentResponse = &response;
 
@@ -26,11 +27,11 @@ bool TestHandler::handleRequest(HttpServerRequest &request, HttpServerResponse &
 
 void TestHandler::theEnd()
 {
-    debug()<<"Finished Long Running Request";
+    tDebug()<<"Finished Long Running Request";
     currentResponse->writeHead(200, "OK");
     currentResponse->end("Hello World\n");
     currentResponse->flush();
-    debug()<<"End was called";
+    tDebug()<<"End was called";
 
     currentResponse = 0;
     currentRequest  = 0;

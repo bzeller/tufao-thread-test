@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 
     auto threadInit = []{
 
-        qDebug()<<"Running Thread initializer "<<QThread::currentThreadId();
+        tDebug()<<"Running Thread initializer ";
 
         HttpServerRequestRouter* router = new HttpServerRequestRouter();
         TestHandler *handler = new TestHandler(router);
@@ -33,18 +33,6 @@ int main(int argc, char *argv[])
 
         return router;
     };
-
-
-
-    TestHandler handler;
-    HttpServerRequestRouter router;
-
-    router.map({
-            {QRegularExpression{"^/thread$"}, handler},
-            {QRegularExpression{""}, HttpFileServer::handler("public")},
-            {QRegularExpression{""}, NotFoundHandler::handler()}
-    });
-
 
     HttpServer server;
 
