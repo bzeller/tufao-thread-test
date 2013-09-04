@@ -6,6 +6,7 @@
 #include <Tufao/HttpServerRequestRouter>
 #include <Tufao/HttpServer>
 #include <Tufao/threadedhttprequestdispatcher.h>
+#include <Tufao/threadedhttppluginserver.h>
 #include <functional>
 #include <QDebug>
 #include <QThread>
@@ -17,6 +18,8 @@ using namespace Tufao;
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
+
+#if 0
 
     auto threadInit = []{
 
@@ -43,6 +46,18 @@ int main(int argc, char *argv[])
                      &dispatch, &ThreadedHttpRequestDispatcher::handleRequest);
 
     server.listen(QHostAddress::Any, 8080);
+#else
+     HttpServer server;
 
+     ThreadedHttpPluginServer pServer;
+     pServer.setThreadPoolSize(20);
+     pServer.setConfig("config.json");
+
+     QObject::connect(&server, &HttpServer::requestReady,
+                      &pServer, &ThreadedHttpPluginServer::handleRequest);
+
+     server.listen(QHostAddress::Any, 8080);
+
+#endif
     return a.exec();
 }

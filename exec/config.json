@@ -1,0 +1,33 @@
+{
+    "version": 0,
+    "plugins": [
+        {
+            "name": "test",
+            "path": "libThreadTestHandler.so"
+        },
+        {
+            "name": "public",
+            "path": "libFileServerHandler.so",
+            "customData": "public"
+        },
+        {
+            "name": "404",
+            "path": "libNotFoundHandler.so",
+            "customData": "<h1>Not Found</h1><p>I'm sorry, but it's your fault</p>"
+        }
+    ],
+    "requests": [
+        {
+            "path": "^/thread[0-9]$",
+            "plugin": "test"
+        },
+        {
+            "path": "",
+            "plugin": "public"
+        },
+        {
+            "path": "",
+            "plugin": "404"
+        }
+    ]
+}
