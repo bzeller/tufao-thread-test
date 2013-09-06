@@ -20,13 +20,15 @@ bool TestHandler::handleRequest(HttpServerRequest &request, HttpServerResponse &
     currentRequest = &request;
     currentResponse = &response;
 
-    QTimer::singleShot(10 * 1000,this,SLOT(theEnd())); //some long running async task
+    QTimer::singleShot(10* 1000,this,SLOT(theEnd())); //some long running async task
+
 
     return true;
 }
 
 void TestHandler::theEnd()
 {
+
     tDebug()<<"Finished Long Running Request";
     currentResponse->writeHead(200, "OK");
     currentResponse->end("Hello World\n");

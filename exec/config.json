@@ -18,7 +18,7 @@
     ],
     "requests": [
         {
-            "path": "^/thread[0-9]$",
+            "path": "^/thread[0-9]+$",
             "plugin": "test"
         },
         {

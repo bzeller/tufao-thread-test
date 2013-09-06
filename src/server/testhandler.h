@@ -20,6 +20,7 @@ class TestHandler : public QObject,
     private:
         Tufao::HttpServerRequest  *currentRequest;
         Tufao::HttpServerResponse *currentResponse;
+        QList<Tufao::HttpServerResponse*> requests;
         
 };
 
