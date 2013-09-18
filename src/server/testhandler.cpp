@@ -3,7 +3,7 @@
 #include <QThread>
 #include <QTimer>
 #include <Tufao/HttpServerResponse>
-#include <Tufao/threadedhttprequestdispatcher.h>
+#include <Tufao/ThreadedHttpServer>
 
 using namespace Tufao;
 

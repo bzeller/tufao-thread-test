@@ -4,9 +4,9 @@
 #include <Tufao/HttpFileServer>
 #include <Tufao/NotFoundHandler>
 #include <Tufao/HttpServerRequestRouter>
-#include <Tufao/HttpServer>
-#include <Tufao/threadedhttprequestdispatcher.h>
-#include <Tufao/threadedhttppluginserver.h>
+#include <Tufao/ThreadedHttpServer>
+#include <Tufao/httpconnectionhandler.h>
+
 #include <functional>
 #include <QDebug>
 #include <QThread>
@@ -39,14 +39,14 @@ int main(int argc, char *argv[])
     server.listen(QHostAddress::Any, 8080);
 
 #else
-#if 0
+#if 1
     //BASIC THREAD TEST
 
-    auto threadInit = [](void**){
+    auto threadInit = [](AbstractConnectionHandler* connHandler, void**){
 
         tDebug()<<"Running Thread initializer ";
 
-        HttpServerRequestRouter* router = new HttpServerRequestRouter();
+        HttpServerRequestRouter* router = new HttpServerRequestRouter(connHandler);
         TestHandler *handler = new TestHandler(router);
 
         router->map({
@@ -55,24 +55,20 @@ int main(int argc, char *argv[])
                 {QRegularExpression{""}, NotFoundHandler::handler()}
         });
 
-        return router;
+        QObject::connect(connHandler, &AbstractConnectionHandler::requestReady,
+                         router, &HttpServerRequestRouter::handleRequest);
     };
 
-    HttpServer server;
-
-    ThreadedHttpRequestDispatcher dispatch(threadInit);
-    dispatch.setThreadPoolSize(20);
-
-    QObject::connect(&server, &HttpServer::requestReady,
-                     &dispatch, &ThreadedHttpRequestDispatcher::handleRequest);
-
+    ThreadedHttpServer server;
+    server.setRequestHandlerFactory(threadInit);
+    server.setThreadPoolSize(20);
     server.listen(QHostAddress::Any, 8080);
 #else
     //PLUGIN BASED THREAD TEST
      HttpServer server;
 
      ThreadedHttpPluginServer pServer;
-     pServer.setThreadPoolSize(100);
+     pServer.setThreadPoolSize(50);
      pServer.setConfig("config.json");
 
      QObject::connect(&server, &HttpServer::requestReady,

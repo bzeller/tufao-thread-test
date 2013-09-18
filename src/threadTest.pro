@@ -2,6 +2,7 @@ TEMPLATE = subdirs
 
 
 SUBDIRS += server \
-    ThreadTestHandler \
-    NotFoundHandler \
-    FileServerHandler
+#SUBDIRS += ThreadTestHandler
+#SUBDIRS += NotFoundHandler
+#SUBDIRS += FileServerHandler
+#SUBDIRS += JsonHandler
