@@ -4,7 +4,7 @@
 #include <Tufao/HttpFileServer>
 #include <Tufao/NotFoundHandler>
 #include <Tufao/HttpServerRequestRouter>
-#include <Tufao/ThreadedHttpServer>
+#include <Tufao/threadedhttppluginserver.h>
 #include <Tufao/httpconnectionhandler.h>
 
 #include <functional>
@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
     server.listen(QHostAddress::Any, 8080);
 
 #else
-#if 1
+#if 0
     //BASIC THREAD TEST
 
     auto threadInit = [](AbstractConnectionHandler* connHandler, void**){
@@ -65,16 +65,12 @@ int main(int argc, char *argv[])
     server.listen(QHostAddress::Any, 8080);
 #else
     //PLUGIN BASED THREAD TEST
-     HttpServer server;
 
      ThreadedHttpPluginServer pServer;
      pServer.setThreadPoolSize(50);
      pServer.setConfig("config.json");
 
-     QObject::connect(&server, &HttpServer::requestReady,
-                      &pServer, &ThreadedHttpPluginServer::handleRequest);
-
-     server.listen(QHostAddress::Any, 8080);
+     pServer.listen(QHostAddress::Any, 8080);
 
 #endif
 #endif
