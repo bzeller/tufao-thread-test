@@ -11,7 +11,7 @@ QT       += core
 QT       -= gui
 
 TARGET = server
-CONFIG   += console
+CONFIG   += console debug
 CONFIG   -= app_bundle
 
 TEMPLATE = app

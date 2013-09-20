@@ -1,18 +1,8 @@
 #include "jsonhandler.h"
+#include <Tufao/ThreadedHttpServer>
 
-#include <QtCore/QtPlugin>
-#include <Tufao/HttpServerResponse>
-
-
-std::function<bool (Tufao::HttpServerRequest &, Tufao::HttpServerResponse &)>
-JsonHandler::createHandler(const QHash<QString, Tufao::HttpServerPlugin *> &dependencies
-                               , const QVariant &customData)
+int JsonHandler::add(int a, int b)
 {
-    //Create a copy
-    QVariant custom = customData;
-    return [custom](Tufao::HttpServerRequest &, Tufao::HttpServerResponse &res){
-        res.writeHead(Tufao::HttpResponseStatus::NOT_FOUND);
-        res.end(custom.toByteArray());
-        return true;
-    };
+    Tufao::tDebug()<<"Adding "<<a<<" and "<<b;
+    return a+b;
 }

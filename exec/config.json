@@ -2,6 +2,10 @@
     "version": 0,
     "plugins": [
         {
+            "name": "json",
+            "path": "../build/debug/JsonHandler/libJsonHandler.so"
+        },
+        {
             "name": "test",
             "path": "libThreadTestHandler.so"
         },
@@ -17,6 +21,10 @@
         }
     ],
     "requests": [
+        {
+            "path": "^/calculator(/.*)?$",
+            "plugin": "json"
+        },
         {
             "path": "^/thread[0-9]+$",
             "plugin": "test"

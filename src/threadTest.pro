@@ -5,4 +5,4 @@ SUBDIRS += server
 SUBDIRS += ThreadTestHandler
 SUBDIRS += NotFoundHandler
 SUBDIRS += FileServerHandler
-#SUBDIRS += JsonHandler
+SUBDIRS += JsonHandler

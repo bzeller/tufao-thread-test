@@ -10,13 +10,18 @@ CONFIG   += C++11 TUFAO1
 
 TARGET = JsonHandler
 TEMPLATE = lib
-CONFIG += plugin
+CONFIG += plugin debug
 
-DESTDIR = ../../../exec
 
-SOURCES += jsonhandler.cpp
+SOURCES += jsonhandler.cpp \
+    jsonhandlerplugin.cpp \
+    abstractjsonhandler.cpp \
+    httpconnection.cpp
 
-HEADERS += jsonhandler.h
+HEADERS += jsonhandler.h \
+    jsonhandlerplugin.h \
+    abstractjsonhandler.h \
+    httpconnection.h
 OTHER_FILES += JsonHandler.json
 
 unix:!symbian {

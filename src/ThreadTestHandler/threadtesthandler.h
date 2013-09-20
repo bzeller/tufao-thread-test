@@ -18,10 +18,6 @@ class TestHandler : public QObject,
     public slots:
         void theEnd ();
 
-    private:
-        Tufao::HttpServerRequest  *currentRequest;
-        Tufao::HttpServerResponse *currentResponse;
-
 };
 
 #endif // THREADTESTHANDLER_H

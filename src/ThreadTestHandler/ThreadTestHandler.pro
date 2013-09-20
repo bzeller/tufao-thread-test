@@ -15,10 +15,12 @@ CONFIG += plugin
 DESTDIR = ../../../exec
 
 SOURCES += threadtesthandler.cpp \
-    threadtesthandlerfactory.cpp
+    threadtesthandlerfactory.cpp \
+    httpconnection.cpp
 
 HEADERS += threadtesthandler.h \
-    threadtesthandlerfactory.h
+    threadtesthandlerfactory.h \
+    httpconnection.h
 
 OTHER_FILES += ThreadTestHandler.json
 
